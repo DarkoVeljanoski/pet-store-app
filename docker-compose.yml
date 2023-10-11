@@ -1,0 +1,33 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:latest
+    restart: on-failure
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: petStore_db
+    networks:
+      - my-network
+  pet-store:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pet-store
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL : jdbc:mysql://mysql:3306/petStore_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: password
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
+    external: false

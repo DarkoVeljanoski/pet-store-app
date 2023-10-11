@@ -1,0 +1,59 @@
+type Query {
+    users: [User]
+    pets: [Pet]
+    buyHistories : [BuyHistory]
+}
+
+type Mutation {
+    createUsers: [User]
+    createPets: [Pet]
+}
+
+type User {
+    Id: ID!
+    firstName: String
+    lastName: String
+    email: String
+    Budget: Float
+}
+
+type UserResponse {
+    Id: ID!
+    firstName: String
+    lastName: String
+    email: String
+    Budget: Float
+}
+
+type Pet {
+    Id: ID!
+    Owner : User
+    Name: String
+    PetType: Type
+    Description: String
+    DateOfBirth: String
+    Price: Float
+    Rating: Int
+}
+
+type PetResponse {
+    Id: ID!
+    Owner : User
+    Name: String
+    PetType: Type
+    Description: String
+    DateOfBirth: String
+    Price: Float
+    Rating: Int
+}
+
+type BuyHistory {
+    Id: ID!
+    CreatedOn: String
+    NumberOfSuccesses: Int
+    NumberOfFailures: Int
+}
+
+enum Type {
+   CAR,DOG
+}
